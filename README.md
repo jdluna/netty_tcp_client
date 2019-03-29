@@ -1,7 +1,3 @@
-## sd-helper-java
-This is the maven project for SD-helper-java client 
+## netty tcp client 
+This is the maven project for netty tcp client 
 
-It include 
-1. auto-reconnect
-2. TPKT 
-3. TCP client
