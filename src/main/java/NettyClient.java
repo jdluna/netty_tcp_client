@@ -7,9 +7,9 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
 public class NettyClient {
-    private volatile EventLoopGroup workerGroup;
+    private EventLoopGroup workerGroup;
 
-    private volatile Bootstrap bootstrap;
+    private Bootstrap bootstrap;
 
     private volatile boolean closed = false;
 
@@ -23,8 +23,7 @@ public class NettyClient {
         this.remotePort = remotePort;
     }
 
-    public Channel getChan()
-    {
+    public Channel getChan() {
         return chan;
     }
 
@@ -34,8 +33,7 @@ public class NettyClient {
         System.out.println("Stopped Tcp Client: " + getServerInfo());
     }
 
-    void onRead(Object msg)
-    {
+    void onRead(Object msg) {
         System.out.println("[NettyClient]Received Message : " + msg);
     }
 
@@ -59,16 +57,19 @@ public class NettyClient {
                         super.channelInactive(ctx);
                         ctx.channel().eventLoop().schedule(() -> doConnect(), 1, TimeUnit.SECONDS);
                     }
+
                     @Override
                     public void channelActive(ChannelHandlerContext ctx) throws Exception {
                         System.out.println("in channelActive");
                     }
+
                     @Override
                     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                        //System.out.println("Received Message : " + msg);
-                        //ctx.channel().eventLoop().schedule(() -> doConnect(), 1, TimeUnit.SECONDS);
+                        // System.out.println("Received Message : " + msg);
+                        // ctx.channel().eventLoop().schedule(() -> doConnect(), 1, TimeUnit.SECONDS);
                         onRead(msg);
                     }
+
                     @Override
                     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
                         System.out.println("channelReadComplete");
