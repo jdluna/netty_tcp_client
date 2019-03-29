@@ -1,0 +1,15 @@
+image:
+  name: vtas-change-registry.dynamic.nsn-net.net:5000/opentas/build:ntas-19-0
+  entrypoint: ["/bin/bash", "-c"]
+
+before_script:
+    - mvn -version
+stages:
+    - build
+
+build:
+    stage: build
+
+    script:
+        - echo "Building project with maven"
+        - mvn clean install -f pom.xml 
